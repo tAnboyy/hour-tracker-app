@@ -59,7 +59,9 @@ export default function LogScreen() {
     const date = didOpenDate;
     const did = didDrafts[didOpenHour] ?? '';
     const goal = goalDrafts[didOpenHour] ?? '';
-    if (!did.trim()) return;
+    // Skip only if there's nothing to save and nothing existing to clear —
+    // an edit down to empty text still needs to overwrite a previously saved did.
+    if (!did.trim() && !getLog(date, didOpenHour)) return;
     saveLog({ date, hour: didOpenHour, did, goal });
     cancelPingFor(date, didOpenHour);
     updateGoalNotification();

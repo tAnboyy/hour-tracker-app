@@ -1,0 +1,16 @@
+:root { color-scheme: dark; font: 14px/1.45 system-ui, sans-serif; background: #0e1116; color: #e6eaf0; }
+body { margin: 0; min-width: 360px; }
+main { padding: 18px; display: grid; gap: 10px; }
+header, footer, .hours { display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+header div { display: grid; }
+small, label, .hint { color: #8a94a3; }
+strong { font-size: 18px; }
+textarea, input { box-sizing: border-box; width: 100%; border: 1px solid #2a3341; border-radius: 8px; padding: 10px; background: #171c24; color: #e6eaf0; }
+button { border: 0; border-radius: 8px; padding: 10px 14px; background: #f5a623; color: #1a1200; font-weight: 700; cursor: pointer; }
+button.secondary { background: #1e2530; color: #e6eaf0; border: 1px solid #2a3341; }
+button.link { padding: 4px; background: transparent; color: #4c9eff; }
+#status { min-height: 20px; margin: 0; color: #8a94a3; }
+.options { max-width: 540px; margin: 30px auto; }
+.toggle { display: flex; align-items: center; gap: 8px; }
+.toggle input { width: auto; }
+.hours label { flex: 1; }

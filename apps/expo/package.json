@@ -1,0 +1,43 @@
+{
+  "name": "@hour-tracker/expo",
+  "version": "1.0.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "web:export": "expo export --platform web",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.web.json"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "~57.0.17",
+    "@hour-tracker/core": "0.1.0",
+    "@hour-tracker/data": "0.1.0",
+    "@notifee/react-native": "^9.1.8",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@supabase/supabase-js": "^2.110.0",
+    "expo": "~57.0.31",
+    "expo-constants": "~57.0.3",
+    "expo-crypto": "~57.0.4",
+    "expo-file-system": "~57.0.0",
+    "expo-linking": "~57.0.13",
+    "expo-router": "~57.0.29",
+    "expo-sharing": "~57.0.24",
+    "expo-sqlite": "~57.0.4",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-dom": "^19.2.3",
+    "react-native": "0.86.3",
+    "react-native-keyboard-controller": "1.21.9",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0",
+    "react-native-svg": "15.15.4",
+    "react-native-web": "^0.21.2",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@hour-tracker/extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check src/service-worker.js && node --check src/popup.js && node --check src/options.js"
+  }
+}

@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { kvSet } from '../src/db';
 import { ensureChannels, ensureExactAlarms, requestPermissions, rescheduleAll, updateGoalNotification } from '../src/notifications';
 import { getFirstDate } from '../src/repo';
@@ -12,6 +12,7 @@ export default function Onboarding() {
   const router = useRouter();
   const settings = useApp((s) => s.settings);
   const [busy, setBusy] = useState(false);
+  const isWeb = Platform.OS === 'web';
 
   const start = async () => {
     setBusy(true);
@@ -34,16 +35,25 @@ export default function Onboarding() {
       <Text style={styles.title}>Hour Tracker</Text>
       <Text style={styles.sub}>Every hour, on the hour: log what you did and plan the next one.</Text>
       <Card style={{ gap: spacing.sm }}>
-        <Text style={styles.point}>🔔 High-priority ping at the end of every active hour — reply straight from the notification.</Text>
-        <Text style={styles.point}>🔒 Your current hour's goal stays pinned on the lock screen.</Text>
+        <Text style={styles.point}>
+          {isWeb
+            ? '🔔 Best-effort browser reminder at the end of each active hour.'
+            : '🔔 High-priority ping at the end of every active hour — reply straight from the notification.'}
+        </Text>
+        <Text style={styles.point}>
+          {isWeb
+            ? '🎯 Your current goal remains available in the installed web app.'
+            : "🔒 Your current hour's goal stays pinned on the lock screen."}
+        </Text>
         <Text style={styles.point}>⛔ Unlogged hours block the next day until you catch up.</Text>
         <Text style={styles.point}>📊 Dashboard: streaks, compliance, #tag breakdowns.</Text>
       </Card>
       <Text style={styles.note}>
-        Next you'll be asked for notification permission, and possibly the "Alarms & reminders" permission
-        so pings arrive exactly on the hour.
+        {isWeb
+          ? 'Browser reminders are best effort and may be delayed when the browser or operating system suspends background work. The extension or native app is recommended for dependable reminders.'
+          : 'Next you’ll be asked for notification permission, and possibly the “Alarms & reminders” permission so pings arrive exactly on the hour.'}
       </Text>
-      <Button title={busy ? 'Setting up…' : 'Enable notifications & start'} onPress={start} disabled={busy} />
+      <Button title={busy ? 'Setting up…' : isWeb ? 'Set up web app' : 'Enable notifications & start'} onPress={start} disabled={busy} />
     </View>
   );
 }

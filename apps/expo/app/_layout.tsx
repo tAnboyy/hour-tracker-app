@@ -1,10 +1,9 @@
-import notifee, { EventType } from '@notifee/react-native';
 import { Stack, useRouter } from 'expo-router';
 import { useEffect } from 'react';
 import { AppState, StatusBar } from 'react-native';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
-import { handleNotifeeEvent } from '../src/notifications/events';
 import { ensureChannels, ensureExactAlarms, pruneStalePingActions, rescheduleAll, updateGoalNotification } from '../src/notifications';
+import { getInitialNotificationRoute, subscribeNotificationEvents } from '../src/notifications/runtime';
 import { kvGet } from '../src/db';
 import { getBacklogDays, getFirstDate } from '../src/repo';
 import { useApp } from '../src/store';
@@ -31,23 +30,19 @@ export default function RootLayout() {
       // Cold-started from a notification tap → jump straight to that hour.
       // Both the hourly ping (past hour) and the goal notification (current
       // hour) carry the exact date/hour they're about in their data.
-      const initial = await notifee.getInitialNotification();
-      const data = initial?.notification?.data as Record<string, string> | undefined;
+      const data = await getInitialNotificationRoute();
       if (data?.kind === 'ping' || data?.kind === 'goal') {
         router.push(`/log?date=${encodeURIComponent(data.date)}&hour=${encodeURIComponent(data.hour)}`);
       }
     };
     boot();
 
-    const unsubNotifee = notifee.onForegroundEvent(async (event) => {
-      const data = event.detail.notification?.data as Record<string, string> | undefined;
-      if (event.type === EventType.PRESS && (data?.kind === 'ping' || data?.kind === 'goal')) {
+    const unsubNotifee = subscribeNotificationEvents(
+      (data) => {
         router.push(`/log?date=${encodeURIComponent(data.date)}&hour=${encodeURIComponent(data.hour)}`);
-      } else {
-        await handleNotifeeEvent(event);
-      }
-      bump();
-    });
+      },
+      bump
+    );
 
     const sub = AppState.addEventListener('change', (state) => {
       if (state !== 'active' || !kvGet('onboarded')) return;
