@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hour Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <header><div><small>CURRENT GOAL</small><strong id="currentGoal">No goal set</strong></div><span id="syncState">Local</span></header>
+      <label for="did">What did you do last hour?</label>
+      <textarea id="did" rows="3" placeholder="Finished the report #work"></textarea>
+      <label for="nextGoal">What will you focus on next?</label>
+      <input id="nextGoal" placeholder="Plan the next hour" />
+      <button id="save">Save hour</button>
+      <p id="status" role="status"></p>
+      <footer><button class="link" id="openApp">Open full app</button><button class="link" id="openOptions">Settings</button></footer>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hour Tracker settings</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="options">
+      <h1>Hour Tracker settings</h1>
+      <label class="toggle"><input id="remindersEnabled" type="checkbox" /> Enable desktop hourly reminders</label>
+      <div class="hours"><label>First hour <input id="startHour" type="number" min="0" max="23" /></label><label>Last hour ends <input id="endHour" type="number" min="1" max="24" /></label></div>
+      <button id="save">Save settings</button>
+      <button id="test" class="secondary">Send test notification</button>
+      <p id="status" role="status"></p>
+      <p class="hint">Desktop reminders require Chrome to be running and this extension to remain enabled.</p>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

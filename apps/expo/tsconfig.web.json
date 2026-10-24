@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "moduleSuffixes": [".web", ""]
+  },
+  "exclude": [
+    "index.ts",
+    "src/db.ts",
+    "src/export.ts",
+    "src/repo.ts",
+    "src/notifications/background.ts",
+    "src/notifications/events.ts",
+    "src/notifications/index.ts",
+    "src/notifications/runtime.native.ts"
+  ]
+}
